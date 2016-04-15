@@ -1,0 +1,91 @@
+<div *ngIf="User" [ngClass]="{'info-window': 'true', 'shown': userConfig.shown}">
+    <div class="info-wind-content container col-sm-12">
+        <a class="btn btn-close exit" title="Close" (click)="close()">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true" style="font-size: medium;color: #000;"></span>
+        </a>
+        <h3 style="text-align:center;">Donor's Information</h3>
+        <hr>
+        <form class="form-horizontal" *ngIf="Profiles.Patient">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">First Name</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{User.FirstName}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Last Name</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{User.LastName}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Contact Number</label>
+                <div class="col-sm-6">
+                    <a class="form-control-static" [hidden]="userConfig.showContact" (click)="userConfig.showContact = true;">Click to show</a>
+                    <p class="form-control-static" *ngIf="userConfig.showContact">{{User.ContactNumber}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Email</label>
+                <div class="col-sm-6" #emailhidden>
+                    <a class="form-control-static" [hidden]="userConfig.showEmail" (click)="userConfig.showEmail = true;">Click to show</a>
+                    <p class="form-control-static" *ngIf="userConfig.showEmail">{{User.Email}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Blood Group</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{User.BloodGroup | PipeBG}}</p>
+                </div>
+            </div>
+        </form>
+
+        <form *ngIf="Profiles.Donor" (ngSubmit)="onSubmit()" [ngFormModel]="donorForm">
+            <div class="form-group">
+                <label for="fName">First Name</label>
+                <input type="text" class="form-control" [(ngModel)]="User.FirstName" ngControl="fName" #fName="ngForm">
+                <div [hidden]="fName.valid || fName.pristine" class="alert alert-danger">
+                    First name is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lName">Last Name</label>
+                <input type="text" class="form-control" [(ngModel)]="User.LastName" ngControl="lName" #lName="ngForm">
+                <div [hidden]="lName.valid || lName.pristine" class="alert alert-danger">
+                    Last name is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="contact">Contact Number</label>
+                <input type="text" class="form-control" [(ngModel)]="User.ContactNumber" ngControl="contact" #contact="ngForm">
+                <div [hidden]="contact.valid || contact.pristine" class="alert alert-danger">
+                    Required. Accepted formats are +XX XXX XXXX XXX & 00 xxx xxxx xxx, eg. +91 1234567890, 00 1234567890
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" [(ngModel)]="User.Email" ngControl="email" #email="ngForm">
+                <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+                    Email is required. Please enter valid email.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="bg">Blood Group</label>
+                <select class="form-control" [(ngModel)]="User.BloodGroup" ngControl="bg" #bg="ngForm">
+                    <option *ngFor="#b of BloodGroups; #i = index" [value]="i + 1">{{b}}</option>
+                </select>
+                <div [hidden]="bg.valid || bg.pristine" class="alert alert-danger">
+                    Blood group is required
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default" [disabled]="!donorForm.valid">Save</button>
+            <button type="button" class="btn btn-danger" (click)="onRemove()" *ngIf="User._id">Remove</button>
+            <div class="form-group" *ngIf="User._id">
+                <label class="col-sm-5 control-label">Your private link</label>
+                <div class="col-sm-7">
+                    <a [href]="'./' + User._id" class="form-control-static">{{User._id}}</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

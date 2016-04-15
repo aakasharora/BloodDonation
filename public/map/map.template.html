@@ -1,0 +1,10 @@
+<sebm-google-map [latitude]="Latitude" [longitude]="Longitude" [zoom]="zoom" (mapClick)="mapClick($event)">
+    <div *ngIf="Profiles.Patient">
+        <sebm-google-map-marker *ngFor="#d of Donors" [latitude]="d.Location.Latitude" [longitude]="d.Location.Longitude" (markerClick)="markerClick(d)">
+        </sebm-google-map-marker>
+    </div>
+    <div *ngIf="Profiles.Donor">
+        <sebm-google-map-marker [latitude]="donor.Location.Latitude" [longitude]="donor.Location.Longitude" (markerClick)="markerClick(donor)">
+        </sebm-google-map-marker>
+    </div>
+</sebm-google-map>

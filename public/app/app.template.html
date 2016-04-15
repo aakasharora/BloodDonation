@@ -1,0 +1,9 @@
+<header [Profiles]="Profiles" (onProfileChanged)="setActiveProfile($event)"></header>
+<div class="row">
+    <div>
+        <map-component [Profiles]="Profiles" (selectDonor)="selectDonor($event)"></map-component>
+    </div>
+    <div *ngIf="User">
+        <user-detail [User]="User" [Profiles]="Profiles" [userConfig]="userConfig"></user-detail>
+    </div>
+</div>

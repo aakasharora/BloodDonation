@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <title>Blood Donation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- IE required polyfills, in this exact order -->
+    <script src="es6-shim/es6-shim.min.js"></script>
+    <script src="systemjs/dist/system-polyfills.js"></script>
+    <script src="angular2/bundles/angular2-polyfills.min.js"></script>
+    <script src="systemjs/dist/system.src.js"></script>
+    <script src="rxjs/bundles/Rx.min.js"></script>
+    <script src="angular2/bundles/angular2.min.js"></script>
+    <script src="angular2-google-maps/bundles/angular2-google-maps.js"></script>
+    <script src="socket.io/socket.io.js" async defer></script>
+    <script>
+        System.config({
+            "defaultJSExtensions": true
+        });
+        System.import('boot')
+            .then(null, console.error.bind(console));
+    </script>
+
+</head>
+
+<body>
+    <app>Loading...</app>
+</body>
+
+</html>
