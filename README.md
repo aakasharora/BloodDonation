@@ -1,2 +1,2 @@
 # BloodDonation
-App that connects neer by blood donors to those who need blood.
+App that connects near by blood donors in real time to those who need blood.
